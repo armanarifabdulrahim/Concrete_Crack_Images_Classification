@@ -51,11 +51,11 @@ These are steps used to complete this project.
 ## Results
 <p align="center"><img src = "Resources/Classification_report.PNG"></p>    
     
-    - The model accuracy is at 100%. This raises suspicion as it is very unlikely that a model would be able to achieve such a high level of precision, so caution should be exercised when using this code. Further investigation may be necessary to determine if there are any issues with the code that need to be addressed if necessary.
+> The model accuracy is at 100%. This raises suspicion as it is very unlikely that a model would be able to achieve such a high level of precision, so caution should be exercised when using this code. Further investigation may be necessary to determine if there are any issues with the code that need to be addressed if necessary.
     
 <p align="center"><img src = "Resources/tensorboard.PNG"></p> 
 
-    - TensorBoard graph showed minimal overfitting and loss. 
+     TensorBoard graph showed minimal overfitting and loss. 
     
 ## Acknowledgement
 > The dataset used for this project is by *[Çağlar Fırat Özgenel](https://data.mendeley.com/datasets/5y9wdsg2zt/2)*
