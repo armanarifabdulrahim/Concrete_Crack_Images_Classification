@@ -1,0 +1,73 @@
+
+# 1st try
+labels = ['Negative', 'Positive']
+img_size = 120
+def read_images(data_dir):
+    data = [] 
+    for label in labels: 
+        path = os.path.join(data_dir, label)
+        class_num = labels.index(label)
+        for img in os.listdir(path):
+            try:
+                img_arr = cv2.imread(os.path.join(path, img), cv2.IMREAD_GRAYSCALE)
+                resized_arr = cv2.resize(img_arr, (img_size, img_size)) 
+                data.append([resized_arr, class_num])
+            except Exception as e:
+                print(e)
+    return np.array(data)
+
+Dataset = read_images(os.path.join(os.getcwd(), 'Dataset'))
+
+Im = []
+for i in Dataset:
+    if(i[1] == 0):
+        Im.append("Negative")
+    elif(i[1] == 1):
+        Im.append("Positive")
+
+plt.figure(figsize=(10, 10))
+plt.subplot(2, 2, 1)
+sns.set_style('darkgrid')
+axl = sns.countplot(Im)
+axl.set_title("Number of Images")
+
+x = []
+y = []
+
+for feature, label in Dataset:
+    x.append(feature)
+    y.append(label)
+
+x = np.array(x).reshape(-1, img_size, img_size, 1)
+x = x / 255
+y = np.array(y)
+
+
+
+# 2nd try
+tf.random.set_seed(42)
+np.random.seed(42)
+
+full_path_pos = [os.path.join(curdir_pos, img) for img in pos_filepaths]
+full_path_neg = [os.path.join(curdir_neg, img) for img in neg_filepaths]
+print(full_path_pos[0])
+print(full_path_neg[0])
+
+fig, ax = plt.subplots(2,5, figsize=(12, 6), sharex=True, sharey=True)
+for image_idx in range(10):
+    ax[image_idx//5, image_idx%5].imshow(Image.open(full_path_neg[image_idx]))
+    ax[image_idx//5, image_idx%5].axis('off')
+plt.show()
+
+no_crack_files = [[img, 0] for img in full_path_pos] # cracks
+crack_files = [[img, 1] for img in full_path_neg] # no cracks
+all_files = crack_files + no_crack_files
+all_files[0]
+
+#Model evaluation 1st try
+test_loss,test_acc = model.evaluate(pf_test)
+print("--------------------Evaluation After Training----------------")
+print("Loss = ",test_loss)
+print("Accuracy = ",test_acc)
+
+
